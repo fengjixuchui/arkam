@@ -1,5 +1,6 @@
 # Arkam - Stack Machine VM
 
+![Arkam](misc/logo.png)
 
 Purposes
 
