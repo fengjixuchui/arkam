@@ -1,0 +1,1 @@
+: main 42 ; ( sol prepares wrapper routine)

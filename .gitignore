@@ -1,0 +1,6 @@
+out
+bin/*
+!bin/.keep
+todo.org
+src/core.sol.h
+

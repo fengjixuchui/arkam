@@ -1,0 +1,41 @@
+(defun sol-mode ()
+  "Sol Mode"
+  (interactive)
+  (kill-all-local-variables)
+  (setq mode-name "sol-mode")
+  (setq major-mode 'sol-mode)
+  (set-syntax-table sol-mode-syntax-table)
+  (set (make-local-variable 'font-lock-defaults) '(sol-mode-font-lock-keywords))
+  (run-hooks 'sol-mode-hook))
+
+(defvar sol-mode-syntax-table
+  (let ((st (make-syntax-table)))
+    (modify-syntax-entry ?#  "<" st)
+    (modify-syntax-entry ?\n ">" st)
+    (modify-syntax-entry ?\" "\"" st)
+    (modify-syntax-entry ?\( "<1b" st)
+    (modify-syntax-entry ?\) ">4b" st)
+    (modify-syntax-entry ?\: "(" st)
+    (modify-syntax-entry ?\; ")" st)
+    (modify-syntax-entry ?\[ "(b" st)
+    (modify-syntax-entry ?\] ")b" st)
+    st)
+  "Syntax table for `sol-mode'.")
+
+(defconst sol-mode-font-lock-keywords
+  (list
+   '("\\(^\\|\\s-\\)0x[0-9a-fA-F]+[ \n]" . font-lock-constant-face)   
+   '("\\(^\\|\\s-\\):\\s-+[^\s-]+" . font-lock-function-name-face)
+   '("\\(^\\|\\s-\\)const:\\s-+[^\s-]+" . font-lock-function-name-face)
+   '("\\(^\\|\\s-\\)var:\\s-+[^\s-]+" . font-lock-function-name-face)
+   '("\\(^\\|\\s-\\)val:\\s-+[^\s-]+" . font-lock-function-name-face)
+   '("\\(^\\|\\s-\\);\\(\\s-\\|\\\n\\|\\'\\)" . font-lock-function-name-face)
+   '("[A-Z?;][A-Z0-9]+" . font-lock-keyword-face)
+   '("\\(^\\|\\s-\\)\\&" . font-lock-keyword-face)   
+   '("\\(^\\|\\s-\\)-?\\([0-9]+[\\\s-\\\n]\\)+" . font-lock-constant-face)
+   '("\\[" . font-lock-comment-face)
+   '("\\]" . font-lock-comment-face)
+   )
+  "highlighting for Sol mode")
+
+(provide 'sol-mode)
